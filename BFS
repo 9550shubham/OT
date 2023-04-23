@@ -1,0 +1,28 @@
+clc
+clear all
+syms a
+syms b
+syms m
+a=[2 3 -1 4;-1 -2 6 -7];   % 2x1+3x2-x3+x4=8  and x1-2x2+6x3-7x4=-3
+b=[8;-3];        
+c=[2 3 4 7];      %  max z=2x1+3x2+4x3+7x4
+m=size(a,1);
+n=size(a,2);
+if (n>m)
+    nCm=nchoosek(n,m);
+    p=nchoosek(1:n,m);
+    sol=[];
+    for i=1:nCm
+        y=zeros(n,1);  % no of variables
+        a1=a(:,p(i,:));
+        X=inv(a1)*b;
+        if all(X>=0 & X~=inf & X~=-inf) % feasibility
+            y(p(i,:))=X;
+            sol=[sol y]
+        end
+    end
+    else error('m>n')
+end
+z=c*sol
+[obj index]=max(z)
+BFS=sol(:,index)
