@@ -3,7 +3,7 @@ clc
 clear all
 
 Variables={'x1','x2','s1','s2','A1','A2','sol'};
-OVariables={'x_ 1','x_ 2','s_ 1','s_ 2','sol'}; % original variables
+OVariables={'x_ 1','x_ 2','s_ 1','s_ 2','sol'}; 
 OrigC=[-3 -5 0 0 -1 -1 0];
 a=[1 3 -1 0 1 0; 1 1 0 -1 0 1];
 b=[3;2];
@@ -21,7 +21,7 @@ simplex_table=[zjcj;A];
 array2table(simplex_table,'VariableNames',Variables)
 RUN=true;
 while RUN
-if any(zjcj(1:end-1)<0) % check for negative value
+if any(zjcj(1:end-1)<0) 
  fprintf(' the current BFS is not optimal \n')
  zc=zjcj(1:end-1);
  [Enter_val, pvt_col]= min(zc);
@@ -47,7 +47,6 @@ for i=1:size(A,1)
  A(i,:)=A(i,:)-A (i, pvt_col).*A(pvt_row,:);
  end
 end
-%  zjcj=zjcj-zjcj (pvt_col).*A(pvt_row,:);
 zjcj=cost(bv)*A-cost;
  next_table=[zjcj;A];
  table=array2table(next_table,'VariableNames',Variables)
@@ -63,8 +62,8 @@ end
 
 % PHASE-2
 fprintf('**** PHASE-2 **** \n')
-A(:,Artifical_var)=[]; % Removing Artificial var by giving them empty value
-OrigC(:,Artifical_var)=[]; % Removing Artificial var cost by giving them empty value
+A(:,Artifical_var)=[]; 
+OrigC(:,Artifical_var)=[]; 
 cost=OrigC;
 zjcj=cost(bv)*A-cost;
 simplex_table=[zjcj;A];
@@ -72,7 +71,7 @@ array2table(simplex_table,'VariableNames',OVariables)
 
 RUN=true;
 while RUN
-if any(zjcj(1:end-1)<0) % check for negative value
+if any(zjcj(1:end-1)<0) 
  fprintf('The current BFS is not optimal \n')
  zc=zjcj(1:end-1);
  [Enter_val, pvt_col]= min(zc);
@@ -98,7 +97,7 @@ for i=1:size(A,1)
  A(i,:)=A(i,:)-A (i, pvt_col).*A(pvt_row,:);
  end
 end
-%  zjcj=zjcj-zjcj (pvt_col).*A(pvt_row,:);
+
 zjcj=cost(bv)*A-cost;
 next_table=[zjcj;A];
  table=array2table(next_table,'VariableNames',OVariables)
