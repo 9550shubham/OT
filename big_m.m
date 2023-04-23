@@ -1,4 +1,3 @@
-% Big M method
 clc
 clear all
 M=1000;
@@ -11,7 +10,6 @@ A=[a b];
 bv=[4 5 6];
 zjcj=cost(bv)*A-cost;
 
-% Display initial simplex table
 simplex_table=[zjcj; A];
 array2table(simplex_table,'VariableNames',Var)
 RUN=true;
@@ -38,7 +36,6 @@ if any(zjcj(1:end-1)<0) % check for negative value
  pvt_key=A(pvt_row, pvt_col);
  A(pvt_row,:)=A (pvt_row,:)./pvt_key;
 
- % row operation 
 for i=1:size(A,1)
  if i~=pvt_row
  A(i,:)=A(i,:)-A (i, pvt_col).*A(pvt_row,:);
